@@ -1,0 +1,47 @@
+pipeline:
+  name: cdeploy 
+  identifier: cdeploy
+  projectIdentifier: projectc
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: projectc-deploy
+        identifier: projectcdeploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: webcfrontend
+          environment:
+            environmentRef: webc
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: webcinfra
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+
