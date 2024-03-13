@@ -1,12 +1,12 @@
 pipeline:
-  name: bdeploy 
+  name: bdeploy
   identifier: bdeploy
   projectIdentifier: projectb
   orgIdentifier: default
   tags: {}
   stages:
     - stage:
-        name: projectb-deploy
+        name: projectjj-deploy
         identifier: projectbdeploy
         description: ""
         type: Deployment
@@ -44,4 +44,3 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
-
