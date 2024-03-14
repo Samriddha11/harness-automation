@@ -37,4 +37,5 @@ pipeline:
                     repo: neosam01/webapp
                     tags:
                       - latest
+                      - <+pipeline.sequenceId>
                     dockerfile: dockerfile
