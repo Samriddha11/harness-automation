@@ -1,0 +1,40 @@
+pipeline:
+  name: buildnpush
+  identifier: buildnpush
+  projectIdentifier: projectb
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: gitwebapp
+        repoName: webapp
+        build:  <+input> 
+  stages:
+    - stage:
+        name: buildjob
+        identifier: buildjob
+        description: ""
+        type: CI 
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: webainfracon
+              namespace: webapp
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os:  Linux 
+          execution:
+            steps:
+              - step:
+                  type:  BuildAndPushDockerRegistry 
+                  name:  BuildAndPushDockerRegistry_1 
+                  identifier:  BuildAndPushDockerRegistry_1 
+                  spec:
+                    connectorRef: account.harnessImage
+                    repo: neosam01/webapp
+                    tags:
+                      - latest
+                    dockerfile: dockerfile
