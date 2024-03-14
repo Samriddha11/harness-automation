@@ -9,29 +9,29 @@ pipeline:
       codebase:
         connectorRef: gitwebapp
         repoName: webapp
-        build:  <+input> 
+        build: <+input>
   stages:
     - stage:
         name: buildjob
         identifier: buildjob
         description: ""
-        type: CI 
+        type: CI
         spec:
           cloneCodebase: true
           infrastructure:
             type: KubernetesDirect
             spec:
-              connectorRef: webainfracon
+              connectorRef: webbinfracon
               namespace: webapp
               automountServiceAccountToken: true
               nodeSelector: {}
-              os:  Linux 
+              os: Linux
           execution:
             steps:
               - step:
-                  type:  BuildAndPushDockerRegistry 
-                  name:  BuildAndPushDockerRegistry_1 
-                  identifier:  BuildAndPushDockerRegistry_1 
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: account.harnessImage
                     repo: neosam01/webapp
