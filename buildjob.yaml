@@ -39,3 +39,20 @@ pipeline:
                       - latest
                       - <+pipeline.sequenceId>
                     dockerfile: dockerfile
+              - step:
+                  type: AquaTrivy
+                  name: AquaTrivy_1
+                  identifier: AquaTrivy_1
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: container
+                    advanced:
+                      log:
+                        level: info
+                    privileged: true
+                    image:
+                      type: docker_v2
+                      name: neosam01/webapp
+                      tag: "8"
