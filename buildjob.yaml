@@ -55,4 +55,4 @@ pipeline:
                     image:
                       type: docker_v2
                       name: neosam01/webapp
-                      tag: "8"
+                      tag: <+pipeline.sequenceId>
