@@ -18,7 +18,7 @@ pipeline:
             environmentRef: weba
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: webbinfra
+              - identifier: webainfra
           execution:
             steps:
               - step:
